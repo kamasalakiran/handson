@@ -84,5 +84,6 @@ def title_verification(context):
 
 @then("screenshot taken")
 def screenshot_swaglabs(context):
-    context.app.screenshot("swaglabs.png", "screenshots")
+    screenshot_folder = "screenshots"
+    context.app.screenshot("swaglabs.png", screenshot_folder)
 
