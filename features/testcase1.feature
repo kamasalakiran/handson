@@ -40,5 +40,5 @@ Feature: Login into a page and taking screenshot
     Examples:
       | firstname | lastname | mobile     | email         |
       | kiran     | kumar    | 9182874019 | kkk@gmail.com |
-      | jaya      | sudha    | 6304720999 | jjj@gmail.com |
+      | kala      | kala     | 6304720999 | jjj@gmail.com |
       | Om        | prakash  | 7780132888 | hhh@gmail.com |
