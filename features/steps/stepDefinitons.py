@@ -1,5 +1,6 @@
 from behave import *
 from features.steps.testcase1 import LoginTest
+import time
 
 
 @given("the login page is open")
@@ -86,4 +87,31 @@ def title_verification(context):
 def screenshot_swaglabs(context):
     screenshot_folder = "screenshots"
     context.app.screenshot("swaglabs.png", screenshot_folder)
+
+@given("the form is open")
+def qa_form(context):
+    context.app = LoginTest()
+    context.app.login_page("https://demoqa.com/automation-practice-form")
+
+@then('user enter {firstname} and {lastname} and {mobile} and {email}')
+def details(context, firstname, lastname, mobile, email):
+    context.firstname = firstname
+    context.lastname = lastname
+    context.app.details_qa_form(firstname, lastname, mobile, email)
+
+@then("user selects gender")
+def gender(context):
+    context.app.click('//*[@id="genterWrapper"]/div[2]/div[1]/label')
+
+@then("user submits the page and close the browser")
+def submit(context):
+    context.app.click('//*[@id="submit"]')
+    time.sleep(3)
+    screenshot_folder = "screenshots"
+    filename = f"{context.firstname}_{context.lastname}.png"
+    context.app.screenshot(filename, screenshot_folder)
+    context.app.driver_quit()
+
+
+
 

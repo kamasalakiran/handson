@@ -24,6 +24,8 @@ class LoginTest:
     def click(self,button_xpath):
         wait = WebDriverWait(self.driver, 10)
         element_to_click = wait.until(EC.element_to_be_clickable((By.XPATH, button_xpath)))
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element_to_click)
+        time.sleep(0.5)
         element_to_click.click()
 
     def title(self):
@@ -69,3 +71,11 @@ class LoginTest:
     def credentials_swaglabs(self,username, password):
         self.driver.find_element(By.NAME, "user-name").send_keys(username)
         self.driver.find_element(By.NAME, "password").send_keys(password)
+
+    def details_qa_form(self, firstname, lastname, mobile, email):
+        self.driver.find_element(By.ID, "firstName").send_keys(firstname)
+        self.driver.find_element(By.ID, "lastName").send_keys(lastname)
+        self.driver.find_element(By.ID, "userNumber").send_keys(mobile)
+        self.driver.find_element(By.ID, "userEmail").send_keys(email)
+
+

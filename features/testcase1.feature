@@ -29,3 +29,16 @@ Feature: Login into a page and taking screenshot
       | problem_user    | secret_sauce  |
       | error_user      | secret_sauce  |
       | visual_user     | secret_sauce  |
+
+  @datatypes
+  Scenario Outline: Filling a form
+    Given the form is open
+    Then user enter <firstname> and <lastname> and <mobile> and <email>
+    And user selects gender
+    Then user submits the page and close the browser
+
+    Examples:
+      | firstname | lastname | mobile     | email         |
+      | kiran     | kumar    | 9182874019 | kkk@gmail.com |
+      | jaya      | sudha    | 6304720999 | jjj@gmail.com |
+      | Om        | prakash  | 7780132888 | hhh@gmail.com |
