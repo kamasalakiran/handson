@@ -1,6 +1,7 @@
 from behave import *
 from features.steps.testcase1 import LoginTest
-import time
+from features.steps.selenium_functions import SeleniumCommands
+import time, json
 
 
 @given("the login page is open")
@@ -112,6 +113,93 @@ def submit(context):
     context.app.screenshot(filename, screenshot_folder)
     context.app.driver_quit()
 
+@given("the user submits following details")
+def json_details(context):
+    user_data = json.loads(context.text)
+    context.user_data = user_data
+    print(user_data)
+
+@then("user process the data")
+def json_more_data(context):
+    data = context.user_data
+    name = data["name"]
+    age = data["age"]
+    email = data["email"]
+    print(f"name is {name}, age is {age}, email is {email}")
+
+@given("user opens automation demo page")
+def automation_page(context):
+    context.auto_app = SeleniumCommands()
+    context.auto_app.url_open("https://testautomationpractice.blogspot.com/")
+
+@then("user selects all checkboxes and quit")
+def select_checkboxes(context):
+    sunday = context.auto_app.checkbox_selection("ID", "sunday")
+    monday = context.auto_app.checkbox_selection("ID", "monday")
+    if sunday.is_selected() and monday.is_selected():
+        print("both checkboxes are selected")
+    else:
+        print("selection didn't happen")
+    context.auto_app.browser_quit()
+
+@then("user clicks dropdown and selects country using Select command")
+def dropdown(context):
+    context.auto_app.dropdown_selection("ID", "country", text = "India")
+    context.auto_app.dropdown_selection("XPATH", '//*[@id="country"]', ivalue = "canada" )
+    context.auto_app.dropdown_selection("ID", "country", index = 4)
+
+@then("user quits the browser")
+def quit_browser(context):
+    context.auto_app.browser_quit()
+
+
+@then("user selects the date")
+def date_picker(context):
+    context.auto_app.click('//*[@id="datepicker"]')
+    selected_date = context.auto_app.date_picker("XPATH", "//span[@class='ui-datepicker-month']",
+                                                 "XPATH", "//span[@class='ui-datepicker-year']",
+                                                 "//*[@id='ui-datepicker-div']/div/a[2]/span",
+                                                 "//table[@class='ui-datepicker-calendar']//a",
+                                                 "June","2026", "3")
+    print("✅ Selected date is:", selected_date)
+    assert selected_date != "", "❌ Date was not populated in the input field!"
+    time.sleep(3)
+
+@then("user opts date")
+def date_picker_dropdown(context):
+    context.auto_app.click('//*[@id="txtDate"]')
+    context.auto_app.date_picker_dropdown("XPATH", "//*[@id='ui-datepicker-div']/div/div/select[1]", "XPATH", "//*[@id='ui-datepicker-div']/div/div/select[2]",
+                                          "//table[@class='ui-datepicker-calendar']//tr/td/a", "25", "Jun", "2026")
+    time.sleep(5)
+
+@then("user selects datepicker range")
+def date_picker_range(context):
+    context.auto_app.range_datepicker()
+
+@given("new qa form is opened")
+def new_qa_page_open(context):
+    context.auto_app = SeleniumCommands()
+    context.auto_app.url_open("https://demoqa.com/")
+
+@then("user selects checkboxes")
+def user_selects_checkboxes(context):
+    context.auto_app.click('//*[@id="app"]/div/div/div[2]/div/div[1]/div')
+    context.auto_app.click('//*[@id="item-1"]')
+    context.auto_app.click('//*[@id="tree-node"]/ol/li/span/button')
+    context.auto_app.click('//*[@id="tree-node"]/ol/li/ol/li[1]/span/button')
+    context.auto_app.click('//*[@id="tree-node"]/ol/li/ol/li[1]/ol/li[2]/span/label/span[1]')
+    time.sleep(5)
+
+@then("user performs operations on buttons")
+def user_performs_operations_buttons(context):
+    context.auto_app.get_back()
+    context.auto_app.click('//*[@id="item-4"]/span')
+    context.auto_app.operations_buttons('//*[@id="doubleClickBtn"]', '//*[@id="rightClickBtn"]')
+    time.sleep(5)
+
+@then("user download a file and save it his preferred location")
+def file_download_and_save(context):
+    context.auto_app.download_files('https://demoqa.com/upload-download', '//*[@id="downloadButton"]')
 
 
 

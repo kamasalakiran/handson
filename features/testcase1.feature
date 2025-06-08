@@ -42,3 +42,17 @@ Feature: Login into a page and taking screenshot
       | kiran     | kumar    | 9182874019 | kkk@gmail.com |
       | kala      | kala     | 6304720999 | jjj@gmail.com |
       | Om        | prakash  | 7780132888 | hhh@gmail.com |
+
+  @json_input
+  Scenario:Json loading
+    Given the user submits following details
+    """
+    {
+    "name" : "kiran",
+    "age"  : 30,
+    "email": "kkk@gmail.com"
+    }
+    """
+    Then user process the data
+
+
