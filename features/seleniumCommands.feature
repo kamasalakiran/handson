@@ -21,3 +21,4 @@ Feature: Testing all user commands
     @datepicker_range
     Scenario: datepicker range
       Then user selects datepicker range
+

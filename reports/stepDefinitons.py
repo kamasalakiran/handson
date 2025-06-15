@@ -1,6 +1,6 @@
 from behave import *
-from features.steps.testcase1 import LoginTest
-from features.steps.selenium_functions import SeleniumCommands
+from reports.testcase1 import LoginTest
+from reports.selenium_functions import SeleniumCommands
 import time, json
 
 
@@ -183,23 +183,143 @@ def new_qa_page_open(context):
 
 @then("user selects checkboxes")
 def user_selects_checkboxes(context):
-    context.auto_app.click('//*[@id="app"]/div/div/div[2]/div/div[1]/div')
+    """context.auto_app.click('//*[@id="app"]/div/div/div[2]/div/div[1]/div')
     context.auto_app.click('//*[@id="item-1"]')
     context.auto_app.click('//*[@id="tree-node"]/ol/li/span/button')
     context.auto_app.click('//*[@id="tree-node"]/ol/li/ol/li[1]/span/button')
     context.auto_app.click('//*[@id="tree-node"]/ol/li/ol/li[1]/ol/li[2]/span/label/span[1]')
-    time.sleep(5)
+    time.sleep(5)"""
 
 @then("user performs operations on buttons")
 def user_performs_operations_buttons(context):
-    context.auto_app.get_back()
+    """context.auto_app.get_back()
     context.auto_app.click('//*[@id="item-4"]/span')
     context.auto_app.operations_buttons('//*[@id="doubleClickBtn"]', '//*[@id="rightClickBtn"]')
-    time.sleep(5)
+    time.sleep(5)"""
 
 @then("user download a file and save it his preferred location")
 def file_download_and_save(context):
-    context.auto_app.download_files('https://demoqa.com/upload-download', '//*[@id="downloadButton"]')
+    context.auto_app.download_files('https://www.sample-videos.com/download-sample-doc-file.php', '/html/body/div[3]/div[1]/div[2]/div[2]/table/tbody/tr[1]/td[3]/a')
+    time.sleep(5)
+
+@then("user upload a file")
+def upload_file(context):
+    context.auto_app.upload_file('https://demoqa.com/upload-download', '//*[@id="uploadFile"]')
+    time.sleep(5)
+
+@then("user also upload multiple files")
+def upload_files(context):
+    files = [
+        r"C:\Users\kkira\OneDrive\Pictures\zoJV9ow-supercars-hd-wallpapers.jpg",
+        r"C:\Users\kkira\OneDrive\Desktop\Family\PRADEEP\Budget Preparation - 2023-24 Andhra  pradeep.xlsx",
+        r"C:\Users\kkira\OneDrive\Desktop\Family\PRADEEP\PRADEEP\Srinivasa electronics and home appliances- April CD WORKING.pdf.xlsx"
+    ]
+    context.auto_app.upload_multiple_files('https://testautomationpractice.blogspot.com/','//*[@id="multipleFilesInput"]', files)
+    time.sleep(5)
+
+@then("user plays with dynamic buttons")
+def dynamic_buttons(context):
+    context.auto_app = SeleniumCommands()
+    context.auto_app.dynamic_buttons('//*[@id="HTML5"]/div[1]/button')
+    time.sleep(5)
+
+@then("user plays with alerts")
+def alerts(context):
+    context.auto_app.get_url("https://demoqa.com/alerts")
+    # context.auto_app.alerts('//*[@id="alertButton"]')
+    # context.auto_app.alerts_wait('//*[@id="timerAlertButton"]')
+    #context.auto_app.alert_wait_text('//*[@id="confirmButton"]')
+    context.auto_app.alert_enter_name('//*[@id="promtButton"]')
+    time.sleep(5)
+
+@then("user plays with frame")
+def frames(context):
+    """context.auto_app = SeleniumCommands()
+    context.auto_app.get_url("https://demo.automationtesting.in/Frames.html")
+    context.auto_app.frames('/html/body/section/div[1]/div/div/div/div[1]/div/ul/li[1]/a',
+                                    'singleframe',  '/html/body/section/div/div/div/input')
+    """
+
+@then("user plays with nested frames")
+def nested_frames(context):
+    """context.auto_app.get_url("https://demo.automationtesting.in/Frames.html")
+    context.auto_app.nested_frames()"""
+
+@then('user plays with slider')
+def slider(context):
+    """context.auto_app.get_url('https://demoqa.com/slider')
+    location = context.auto_app.slider()
+    print(location)"""
+
+@then('user plays with scroll button')
+def scrolling(context):
+    context.auto_app = SeleniumCommands()
+    """context.auto_app.get_url("https://flagpedia.net/index")
+    #context.auto_app.scroll_approach_1()
+    context.auto_app.scroll_approach_2()
+    context.auto_app.scroll_approach_3()
+    context.auto_app.scroll_approach_4()
+    time.sleep(5)"""
+
+@then("user plays with progress bar")
+def progress_bar(context):
+   """ context.auto_app.get_url('https://demoqa.com/progress-bar')
+    context.auto_app.progress_bar("75")"""
+
+@then("user plays with drag and drop")
+def drag_and_drop(context):
+    context.auto_app = SeleniumCommands()
+    """context.auto_app.get_url("https://demoqa.com/droppable")
+    context.auto_app.drag_and_drop()
+    context.auto_app.click('//*[@id="droppableExample-tab-accept"]')"""
+
+@then("user plays with revert")
+def revert_drag_and_drop(context):
+    """context.auto_app.get_url('https://demoqa.com/droppable')
+    context.auto_app.click('//*[@id="droppableExample-tab-revertable"]')
+    context.auto_app.drag_and_drop_revert()"""
+
+@then("user plays with selectable")
+def selectable(context):
+    """context.auto_app.get_url('https://demoqa.com/selectable')
+    context.auto_app.click('//*[@id="demo-tab-list"]')
+    context.auto_app.selectable()
+    time.sleep(10)"""
+
+@then("user plays resizable")
+def resizable(context):
+    #context.auto_app.get_url("https://demoqa.com/resizable")
+    #context.auto_app.resizable()
+    #context.auto_app.resize_box()
+    #context.auto_app.get_url("https://demoqa.com/sortable")
+    #context.auto_app.click('//*[@id="demo-tabpane-list"]/div/div[6]')
+    #context.auto_app.click('//*[@id="demo-tab-grid"]')
+    #context.auto_app.get_url("https://demoqa.com/auto-complete")
+    #context.auto_app.sortable_list()
+    #context.auto_app.auto_complete()
+    context.auto_app.get_url("https://demoqa.com/select-menu")
+    context.auto_app.select_multiple_options()
+    time.sleep(5)
+
+@then('user plays with tables')
+def tables(context):
+    context.auto_app = SeleniumCommands()
+    context.auto_app.get_url("https://testautomationpractice.blogspot.com/")
+    #context.auto_app.tables()
+    context.auto_app.dynamic_tables()
+
+@then('user plays with broken links')
+def broken_links(context):
+    context.auto_app = SeleniumCommands()
+    context.auto_app.broken_links()
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+filename = os.path.join(os.getcwd(), "image_{timestamp}.png"}
+
+driver.save_screenshot(filename)
+
+
 
 
 
